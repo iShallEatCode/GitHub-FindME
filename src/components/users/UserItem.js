@@ -23,7 +23,7 @@ const UserItem = (props) => {
 }
 
 UserItem.propTypes = {
-  user: PropTypes.object.isRequired
+	user: PropTypes.object.isRequired,
 }
 
 export default UserItem
