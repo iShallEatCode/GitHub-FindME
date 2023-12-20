@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import PropTypes from 'prop-types';
 
 const Search = (props) => {
@@ -20,7 +21,7 @@ const Search = (props) => {
 
 	return (
 		<div className=''>
-			<form className='form' onSubmit={onSubmitHandler} >
+			<form className='form' onSubmit={onSubmitHandler}>
 				<input
 					type='text'
 					name='text'
@@ -47,7 +48,7 @@ Search.propTypes = {
 	searchUsers: PropTypes.func.isRequired,
 	clearUsers: PropTypes.func.isRequired,
 	showClear: PropTypes.bool.isRequired,
-	setAlert: PropTypes.func.isRequired
+	setAlert: PropTypes.func.isRequired,
 };
 
 export default Search;

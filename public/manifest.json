@@ -1,15 +1,16 @@
 {
-  "short_name": "GitHub Finder",
   "name": "GitHub Finder",
+  "short_name": "GitHub Finder",
+  "description": "An app that utilizes GitHub API to search user data.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/svg+xml"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }

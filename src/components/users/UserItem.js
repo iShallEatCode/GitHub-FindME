@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const UserItem = (props) => {
-	const { login, avatar_url, html_url } = props.user
+	const { login, avatar_url, html_url } = props.user;
 
 	return (
 		<div className='card text-center'>
@@ -20,11 +20,11 @@ const UserItem = (props) => {
 				</Link>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 UserItem.propTypes = {
 	user: PropTypes.object.isRequired,
-}
+};
 
-export default UserItem
+export default UserItem;

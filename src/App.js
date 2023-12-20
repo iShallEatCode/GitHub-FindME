@@ -1,13 +1,15 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { Routes, Route, Outlet, Link } from 'react-router-dom';
-import axios from 'axios';
-import Navbar from './components/layout/Navbar';
-import Users from './components/users/Users';
-import User from './components/users/User';
-import Search from './components/users/Search';
-import Alert from './components/layout/Alert';
 import './App.css';
+
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
+import React, { Fragment, useEffect, useState } from 'react';
+
 import About from './components/pages/About';
+import Alert from './components/layout/Alert';
+import Navbar from './components/layout/Navbar';
+import Search from './components/users/Search';
+import User from './components/users/User';
+import Users from './components/users/Users';
+import axios from 'axios';
 
 function App() {
 	const [users, setUsers] = useState([]);
@@ -95,7 +97,7 @@ function App() {
 					<Route
 						path='/'
 						element={
-							<Fragment>
+							<>
 								<Search
 									searchUsers={searchHandler}
 									clearUsers={clearHandler}
@@ -103,13 +105,15 @@ function App() {
 									setAlert={alertHandler}
 								/>
 								<Users loading={loading} users={users} />
-							</Fragment>
+							</>
 						}
 					/>
-					<Route path='about' element={<About />} />
-					<Route path='/user/:login' render={props => (
-						<User { ...props } getUser={getUser} user={user} loading={loading} />
-					)} />
+					<Route path='/about' element={<About />} />
+					<Route
+						exact
+						path='/user/:login'
+						element={<User getUser={getUser} user={user} loading={loading} />}
+					/>
 				</Routes>
 			</div>
 		</div>
