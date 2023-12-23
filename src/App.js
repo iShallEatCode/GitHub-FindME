@@ -1,7 +1,7 @@
 import './App.css';
 
-import { Link, Outlet, Route, Routes } from 'react-router-dom';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import About from './components/pages/About';
 import Alert from './components/layout/Alert';
@@ -16,6 +16,7 @@ function App() {
 	const [user, setUser] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [alert, setAlert] = useState(null);
+	const [repos, setRepos] = useState([]);
 
 	const fetchData = async () => {
 		setLoading(true);
@@ -72,6 +73,22 @@ function App() {
 		}
 	};
 
+	// Get user repos
+	const getUserRepos = async (username) => {
+		setLoading(true);
+
+		try {
+			const res = await axios.get(
+				`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+			);
+
+			setRepos(res.data);
+			setLoading(false);
+		} catch (error) {
+			console.error('Failed to retrieve the user', error);
+		}
+	};
+
 	// Clear users from state
 	const clearHandler = () => {
 		setUsers([]);
@@ -112,7 +129,15 @@ function App() {
 					<Route
 						exact
 						path='/user/:login'
-						element={<User getUser={getUser} user={user} loading={loading} />}
+						element={
+							<User
+								getUser={getUser}
+								getUserRepos={getUserRepos}
+								user={user}
+								repos={repos}
+								loading={loading}
+							/>
+						}
 					/>
 				</Routes>
 			</div>

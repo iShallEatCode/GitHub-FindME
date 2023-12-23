@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import React, { Fragment, useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
+import Repos from '../repos/Repos';
 import Spinner from '../layout/Spinner';
 
 const User = (props) => {
@@ -10,24 +11,27 @@ const User = (props) => {
 
 	useEffect(() => {
 		props.getUser(login);
+		props.getUserRepos(login);
 	}, []);
 
 	const {
-		name,
-		company,
 		avatar_url,
-		location,
 		bio,
 		blog,
-		html_url,
+		company,
 		followers,
 		following,
+		html_url,
+		hireable,
+		location,
+		name,
 		public_repos,
 		public_gists,
-		hireable,
 	} = props.user;
 
-	if (props.loading) return <Spinner />;
+	const { loading, repos } = props;
+
+	if (loading) return <Spinner />;
 
 	return (
 		<Fragment>
@@ -99,14 +103,17 @@ const User = (props) => {
 				</badge>
 				<badge className='badge badge-dark'>Public Gists: {public_gists}</badge>
 			</div>
+			<Repos repos={repos} />
 		</Fragment>
 	);
 };
 
 User.propTypes = {
-	loading: PropTypes.bool,
-	user: PropTypes.object.isRequired,
 	getUser: PropTypes.func.isRequired,
+	getUserRepos: PropTypes.func.isRequired,
+	loading: PropTypes.bool,
+	repos: PropTypes.array.isRequired,
+	user: PropTypes.object.isRequired,
 };
 
 export default User;
