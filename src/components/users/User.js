@@ -1,18 +1,16 @@
 import { FaCheck, FaTimesCircle } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 
-import PropTypes from 'prop-types';
+import GithubContext from '../../context/github/githubContext';
 import Repos from '../repos/Repos';
 import Spinner from '../layout/Spinner';
+import GithubContext from '../../context/github/githubContext';
 
 const User = (props) => {
-	const { login } = useParams();
+	const githubContext = useContext(GithubContext);
 
-	useEffect(() => {
-		props.getUser(login);
-		props.getUserRepos(login);
-	}, []);
+	const { getUser, loading, repos, getUserRepos } = githubContext;
 
 	const {
 		avatar_url,
@@ -29,7 +27,13 @@ const User = (props) => {
 		public_gists,
 	} = props.user;
 
-	const { loading, repos } = props;
+	const { login } = useParams();
+
+	useEffect(() => {
+		getUser(login);
+		getUserRepos(login);
+		// eslint-disable-next-line
+	}, []);
 
 	if (loading) return <Spinner />;
 
@@ -96,24 +100,14 @@ const User = (props) => {
 				</div>
 			</div>
 			<div className='card text-center'>
-				<badge className='badge badge-primary'>Followers: {followers}</badge>
-				<badge className='badge badge-success'>Following: {following}</badge>
-				<badge className='badge badge-light'>
-					Public Repos: {public_repos}
-				</badge>
-				<badge className='badge badge-dark'>Public Gists: {public_gists}</badge>
+				<div className='badge badge-primary'>Followers: {followers}</div>
+				<div className='badge badge-success'>Following: {following}</div>
+				<div className='badge badge-light'>Public Repos: {public_repos}</div>
+				<div className='badge badge-dark'>Public Gists: {public_gists}</div>
 			</div>
 			<Repos repos={repos} />
 		</Fragment>
 	);
-};
-
-User.propTypes = {
-	getUser: PropTypes.func.isRequired,
-	getUserRepos: PropTypes.func.isRequired,
-	loading: PropTypes.bool,
-	repos: PropTypes.array.isRequired,
-	user: PropTypes.object.isRequired,
 };
 
 export default User;
