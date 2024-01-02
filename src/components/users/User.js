@@ -5,12 +5,11 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import GithubContext from '../../context/github/githubContext';
 import Repos from '../repos/Repos';
 import Spinner from '../layout/Spinner';
-import GithubContext from '../../context/github/githubContext';
 
 const User = (props) => {
 	const githubContext = useContext(GithubContext);
 
-	const { getUser, loading, repos, getUserRepos } = githubContext;
+	const { getUser, loading, repos, getUserRepos, user } = githubContext;
 
 	const {
 		avatar_url,
@@ -25,7 +24,7 @@ const User = (props) => {
 		name,
 		public_repos,
 		public_gists,
-	} = props.user;
+	} = user;
 
 	const { login } = useParams();
 

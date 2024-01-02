@@ -6,7 +6,7 @@ import {
 	SET_LOADING,
 } from '../types';
 
-export default (state, action) => {
+export default(state, action) => {
 	switch (action.type) {
 		case SEARCH_USERS:
 			return {

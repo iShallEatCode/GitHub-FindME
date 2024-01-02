@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const UserItem = (props) => {
-	const { login, avatar_url, html_url } = props.user;
+	const { login, avatar_url } = props.user;
 
 	return (
 		<div className='card text-center'>

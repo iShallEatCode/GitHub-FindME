@@ -7,12 +7,14 @@ const Search = (props) => {
 	const githubContext = useContext(GithubContext);
 	const alertContext = useContext(AlertContext);
 
+	const { searchHandler, clearHandler } = githubContext;
+
 	const [text, setText] = useState('');
 
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		if (text) {
-			githubContext.searchUsers(text);
+			searchHandler(text);
 			setText('');
 		} else {
 			alertContext.setAlert('Please enter something', 'light');
@@ -40,10 +42,7 @@ const Search = (props) => {
 				/>
 			</form>
 			{githubContext.users.length > 0 && (
-				<button
-					className='btn btn-light btn-block'
-					onClick={githubContext.clearUsers}
-				>
+				<button className='btn btn-light btn-block' onClick={clearHandler}>
 					Clear
 				</button>
 			)}
