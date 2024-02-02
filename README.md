@@ -1,7 +1,9 @@
 PROJECT GitHub-FindME:
 
 A simple front-end project utilizing the GitHub API to search and retrieve user data. 
-After selecting one of the searched users, the app points out several data figures from that GitHub account, such as followers, following, public repos, profile picture, a list of repos, and more.
+Populates data figures from each GitHub account, such as followers, following, public repos, profile picture, a list of repos, and more.
+
+To Run the Project: npm start
 
 
 Client-Side libraries/technology used:
